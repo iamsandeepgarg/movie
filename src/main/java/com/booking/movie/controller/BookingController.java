@@ -4,6 +4,7 @@ import com.booking.movie.dto.BookingRequest;
 import com.booking.movie.dto.BookingResponse;
 import com.booking.movie.service.BookingService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,8 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping("/")
-    public BookingResponse bookSeat(@RequestBody BookingRequest bookingRequest){
-        return bookingService.bookSeats(bookingRequest);
+    public ResponseEntity<BookingResponse> bookSeat(@RequestBody BookingRequest bookingRequest){
+        return ResponseEntity.ok(bookingService.bookSeats(bookingRequest));
     }
 
 }

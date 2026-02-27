@@ -4,6 +4,7 @@ import com.booking.movie.dto.MovieRequest;
 import com.booking.movie.dto.MovieResponse;
 import com.booking.movie.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,22 +17,23 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping("/")
-    public MovieResponse saveMovie(@RequestBody MovieRequest movieRequest){
-        return movieService.saveMovie(movieRequest);
+    public ResponseEntity<MovieResponse> saveMovie(@RequestBody MovieRequest movieRequest){
+        return ResponseEntity.ok(movieService.saveMovie(movieRequest));
     }
 
     @GetMapping("/")
-    public List<MovieResponse> getAllMovies(){
-        return movieService.getAllMovies();
+    public ResponseEntity<List<MovieResponse>> getAllMovies(){
+        return ResponseEntity.ok(movieService.getAllMovies());
     }
 
 
     @GetMapping("/language/{language}")
-    public List<MovieResponse> getMoviesByLanguage(@PathVariable String language){
-        return movieService.getMoviesByLanguage(language);
+    public ResponseEntity<List<MovieResponse>> getMoviesByLanguage(@PathVariable String language){
+        return ResponseEntity.ok(movieService.getMoviesByLanguage(language));
     }
 
-
-
-    
+    @GetMapping("/city/{city}")
+    public ResponseEntity<List<MovieResponse>> getMoviesByCity(@PathVariable String city){
+        return ResponseEntity.ok(movieService.getMoviesByCity(city));
+    }
 }

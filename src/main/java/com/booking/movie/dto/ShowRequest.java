@@ -1,10 +1,12 @@
 package com.booking.movie.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public record ShowRequest(
     Long movieId,
     Long screenId,
-    LocalDateTime showTime
+    LocalDate showDate,
+    LocalTime showTime
 ) {
 }

@@ -41,6 +41,10 @@ public class MovieService {
         List<Movie> movies = movieRepository.findByLanguageIgnoreCase(language);
         return movies.stream().map(t-> toResponse(t) ).toList();
     }
+    public List<MovieResponse> getMoviesByCity(String city){
+        return movieRepository.findByCity(city);
+        //movies.stream().map(t-> toResponse(t) ).toList();
+    }
 
     private MovieResponse toResponse(Movie m) {
         return new MovieResponse(

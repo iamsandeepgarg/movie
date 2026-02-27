@@ -2,6 +2,12 @@ spring:
   application:
     name: movie
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000
+
   datasource:
     url: jdbc:postgresql://localhost:5432/bookingdb
     username: postgres
@@ -12,7 +18,7 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: update   # auto create tables from entities
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true

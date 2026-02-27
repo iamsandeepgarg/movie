@@ -5,6 +5,7 @@ import com.booking.movie.dto.ScreenResponse;
 import com.booking.movie.service.ScreenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,16 +18,16 @@ public class ScreenController {
     private final ScreenService screenService;
 
     @PostMapping("/")
-    public ScreenResponse saveScreen(@Valid @RequestBody ScreenRequest screenRequest){
+    public ResponseEntity<ScreenResponse> saveScreen(@Valid @RequestBody ScreenRequest screenRequest){
 
         ScreenResponse screenResponse = screenService.saveScreen(screenRequest);
-        return  screenResponse;
+        return ResponseEntity.ok(screenResponse);
     }
 
     @GetMapping("/theatre/{theatreId}")
-    public List<ScreenResponse> getScreenByTheatreId(@PathVariable Long theatreId){
+    public ResponseEntity<List<ScreenResponse>> getScreenByTheatreId(@PathVariable Long theatreId){
         List<ScreenResponse> screens = screenService.getByTheatre(theatreId);
-        return screens;
+        return ResponseEntity.ok(screens);
     }
 
 

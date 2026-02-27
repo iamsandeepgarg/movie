@@ -4,6 +4,7 @@ import com.booking.movie.dto.ShowRequest;
 import com.booking.movie.dto.ShowResponse;
 import com.booking.movie.service.ShowService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,18 +18,19 @@ public class ShowController {
 
 
     @PostMapping("/")
-    public Long saveShow(@RequestBody ShowRequest showRequest){
-        return showService.saveShow(showRequest);
+    public ResponseEntity<Long> saveShow(@RequestBody ShowRequest showRequest){
+        return ResponseEntity.ok(showService.saveShow(showRequest));
     }
 
     @GetMapping("/")
-    public List<ShowResponse> getAllShows(){
-        return showService.getAllShows();
+    public ResponseEntity<List<ShowResponse>> getAllShows(){
+
+         return ResponseEntity.ok(showService.getAllShows());
     }
 
     @GetMapping("/theatre/{theatreId}")
-    public List<ShowResponse> getShowByTheatre(@PathVariable Long theatreId){
-        return showService.getByTheatre(theatreId);
+    public ResponseEntity<List<ShowResponse>> getShowByTheatre(@PathVariable Long theatreId){
+        return ResponseEntity.ok(showService.getByTheatre(theatreId));
     }
 
     @DeleteMapping("/{showId}")

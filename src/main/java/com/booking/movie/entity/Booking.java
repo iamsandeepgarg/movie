@@ -23,7 +23,7 @@ public class Booking extends AuditableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id")
-    private Show show;
+    private ShowDetails show;
 
     private BigDecimal totalAmount;
 

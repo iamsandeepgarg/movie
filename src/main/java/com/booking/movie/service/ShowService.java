@@ -4,7 +4,7 @@ import com.booking.movie.dto.ShowRequest;
 import com.booking.movie.dto.ShowResponse;
 import com.booking.movie.entity.Movie;
 import com.booking.movie.entity.Screen;
-import com.booking.movie.entity.Show;
+import com.booking.movie.entity.ShowDetails;
 import com.booking.movie.repository.MovieRepository;
 import com.booking.movie.repository.ScreenRepository;
 import com.booking.movie.repository.ShowQueryRepository;
@@ -13,7 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -34,9 +35,10 @@ public class ShowService {
         Screen screen = screenRepository.findById(showRequest.screenId())
                 .orElseThrow(()-> new IllegalArgumentException("Screen not found"));
 
-        Show show = Show.builder()
+        ShowDetails show = ShowDetails.builder()
                 .movie(movie)
                 .screen(screen)
+                .showDate(showRequest.showDate())
                 .showTime(showRequest.showTime())
                 .isActive(true)
                 .build();
@@ -53,12 +55,12 @@ public class ShowService {
 
     @Transactional(readOnly = true)
     public List<ShowResponse> getByTheatre(Long theatreId){
-        return  showQueryRepository.findByTheatre(theatreId, LocalDateTime.now());
+        return  showQueryRepository.findByTheatre(theatreId, LocalDate.now(), LocalTime.now());
     }
 
     @Transactional
     public void deactivaShow(Long showId){
-        Show show = showRepository.findById(showId)
+        ShowDetails show = showRepository.findById(showId)
                 .orElseThrow(()-> new IllegalArgumentException("Show not found"));
 
         show.setIsActive(false);

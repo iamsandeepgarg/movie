@@ -3,8 +3,8 @@ package com.booking.movie.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "show_details")
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Show extends BaseTimeEntity {
+public class ShowDetails extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,9 @@ public class Show extends BaseTimeEntity {
     @JoinColumn(name = "screen_id")
     private Screen screen;
 
-    private LocalDateTime showTime;
+    private LocalDate showDate;
+
+    private LocalTime showTime;
 
     private Boolean isActive = true;
 
