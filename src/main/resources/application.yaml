@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: movie
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookingdb
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update   # auto create tables from entities
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 20
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
